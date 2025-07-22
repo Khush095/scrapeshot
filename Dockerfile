@@ -9,8 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Ensure Python output is sent straight to the terminal
 ENV PYTHONUNBUFFERED 1
 
-# --- Install system dependencies needed by Playwright/Chromium ---
-# This replaces the need for packages.txt
+# Install system dependencies needed by Playwright/Chromium
 RUN apt-get update && apt-get install -y \
     libnspr4 \
     libnss3 \
@@ -31,13 +30,11 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# --- Install the Playwright browser ---
-# This command runs during the build, so you don't need to do it in app.py
+# Install the Playwright browser
 RUN playwright install chromium
 
 # Copy the rest of your application code
 COPY . .
 
-# Command to run your Streamlit application
-# Render provides the PORT environment variable, so we use that.
-CMD ["streamlit", "run", "src/streamlit_app.py", "--server.port", "$PORT"]
+# Command to run your Streamlit application (CORRECTED)
+CMD streamlit run src/streamlit_app.py --server.port $PORT
