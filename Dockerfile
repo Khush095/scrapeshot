@@ -37,4 +37,4 @@ RUN playwright install chromium
 COPY . .
 
 # Command to run your Streamlit application (CORRECTED)
-CMD streamlit run src/streamlit_app.py --server.port $PORT
+CMD streamlit run app.py --server.port $PORT
